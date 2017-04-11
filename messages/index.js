@@ -34,11 +34,85 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 */
 
 .matches('new account', [
-	function(session, args, next) {
-		session.send('the intent is new account');
-	}
+	 function (session, args, next) {
+        console.log(args);
+        //session.dialogData.args = args;
+        var accountType = builder.EntityRecognizer.findEntity(args.entities, 'accountType');
+        var accountLevel = builder.EntityRecognizer.findEntity(args.entities, 'accountLevel');
+        var typeOfPersonalAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfPersonalAccount');
+        var typeOfBusinessAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfBusiness');
+        console.log('ENTITIES', accountType, accountLevel, typeOfPersonalAccount, typeOfBusinessAccount);
+        var account = {
+          accountType: accountType ? accountType.entity : null,
+          accountLevel: accountLevel ? accountLevel.entity : null,
+          typeOfPersonalAccount : typeOfPersonalAccount  ? typeOfPersonalAccount.entity  : null,
+          typeOfBusinessAccount: typeOfBusinessAccount? typeOfBusinessAccount.entity : null
+        }
+        session.dialogData.account = account;
 
-])
+        // Prompt for account type
+        var accountTypes = ["Business","Personal"];
+        if (!account.accountType) {
+          builder.Prompts.choice(session, "What type of account do you want to set up?", accountTypes);
+          //builder.Prompts.text(session, 'What type of account do you want to set up? Business or Personal');
+        } else {
+          next();
+        }
+    },
+    function (session, results, next) {
+        console.log('second block');
+    	  var account = session.dialogData.account;
+		    if (results.response) {
+			      console.log('RESPONSE', results);
+			      account.accountType = results.response.entity;
+        }
+        session.dialogData.account = account;
+
+        // Prompt for account level
+        if (!account.accountLevel) {
+            builder.Prompts.choice(session, "What account level do you want to set up?", ["Basic","Premium"]);
+            //builder.Prompts.text(session, 'What level account would you like? Basic or Premium');
+        } else {
+          next();
+        }
+    },
+    function (session, results, next) {
+        console.log('third block');
+    	  var account = session.dialogData.account;
+		    if (results.response) {
+			      console.log('RESPONSE', results);
+			      account.accountLevel = results.response.entity;
+        }
+        session.dialogData.account = account;
+
+        // Prompt for type of business or perosnalaccount level
+        if ((account.accountType.toLowerCase() == 'business') && (!account.typeOfBusinessAccount)) {
+            builder.Prompts.choice(session, "What type of business do you have?", ["LLC","Sole Proprietorship"]);
+        } else if ((account.accountType.toLowerCase() == 'personal') && (!account.typeOfPersonalAccount)) {
+            builder.Prompts.choice(session, "What type of personal account do you need?", ["Individual","Joint"]);
+        } else {
+          next();
+        }
+    },
+
+    function (session, results) {
+        console.log('reply');
+        var account = session.dialogData.account;
+        if (results.response) {
+            console.log('RESPONSE', results);
+            if (account.accountType.toLowerCase() == 'business') {
+                account.typeOfBusinessAccount = results.response.entity;
+            } else if (account.accountType.toLowerCase() == 'personal') {
+                account.typeOfPersonalAccount = results.response.entity;
+            }
+
+
+        }
+       
+        session.send("Intent: 'new account'\n\nAccountType: '%s'\n\nAccountLevel: '%s'\n\nTypeOfBusinessAccount: '%s'\n\nTypeOfPersonalAccount: '%s'",account.accountType, account.accountLevel, account.typeOfBusinessAccount, account.typeOfPersonalAccount);
+    }
+
+]);
 
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
