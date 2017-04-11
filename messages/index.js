@@ -35,7 +35,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
 .matches('new account', [
 	 function (session, args, next) {
-        console.log(args);
+        //console.log(args);
         //session.dialogData.args = args;
         var accountType = builder.EntityRecognizer.findEntity(args.entities, 'accountType');
         var accountLevel = builder.EntityRecognizer.findEntity(args.entities, 'accountLevel');
@@ -48,7 +48,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
           typeOfPersonalAccount : typeOfPersonalAccount  ? typeOfPersonalAccount.entity  : null,
           typeOfBusinessAccount: typeOfBusinessAccount? typeOfBusinessAccount.entity : null
         }
-      
+	 }
 /*
         // Prompt for account type
         var accountTypes = ["Business","Personal"];
