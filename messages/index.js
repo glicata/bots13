@@ -34,7 +34,10 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 */
 
 .matches('new account', [
-session.send('the intent is new account');
+	function(session, args, next) {
+		session.send('the intent is new account');
+	}
+
 ])
 
 .onDefault((session) => {
