@@ -49,7 +49,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
           typeOfBusinessAccount: typeOfBusinessAccount? typeOfBusinessAccount.entity : null
         }
         session.dialogData.account = account;
-
+/*
         // Prompt for account type
         var accountTypes = ["Business","Personal"];
         if (!account.accountType) {
@@ -111,7 +111,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
        
         session.send("Intent: 'new account'\n\nAccountType: '%s'\n\nAccountLevel: '%s'\n\nTypeOfBusinessAccount: '%s'\n\nTypeOfPersonalAccount: '%s'",account.accountType, account.accountLevel, account.typeOfBusinessAccount, account.typeOfPersonalAccount);
     }
-
+*/
 ]);
 
 .onDefault((session) => {
