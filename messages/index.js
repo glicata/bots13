@@ -41,14 +41,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
         var accountLevel = builder.EntityRecognizer.findEntity(args.entities, 'accountLevel');
         var typeOfPersonalAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfPersonalAccount');
         var typeOfBusinessAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfBusiness');
-        console.log('ENTITIES', accountType, accountLevel, typeOfPersonalAccount, typeOfBusinessAccount);
+
         var account = {
           accountType: accountType ? accountType.entity : null,
           accountLevel: accountLevel ? accountLevel.entity : null,
           typeOfPersonalAccount : typeOfPersonalAccount  ? typeOfPersonalAccount.entity  : null,
           typeOfBusinessAccount: typeOfBusinessAccount? typeOfBusinessAccount.entity : null
         }
-        session.dialogData.account = account;
+      
 /*
         // Prompt for account type
         var accountTypes = ["Business","Personal"];
