@@ -42,12 +42,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
         var typeOfPersonalAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfPersonalAccount');
         var typeOfBusinessAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfBusiness');
 
-        var account = {
-          accountType: accountType ? accountType.entity : null,
-          accountLevel: accountLevel ? accountLevel.entity : null,
-          typeOfPersonalAccount : typeOfPersonalAccount  ? typeOfPersonalAccount.entity  : null,
-          typeOfBusinessAccount: typeOfBusinessAccount? typeOfBusinessAccount.entity : null
-        }
+      
 	 }
 
         
