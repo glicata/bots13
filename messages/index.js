@@ -32,12 +32,12 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-
+;.lerkrj;lkjfh
 .matches('new account', [
 	 function (session, args, next) {
         //console.log(args);
         //session.dialogData.args = args;
-        
+        blsdjkhlasgkrdjh
 		session.send('This is a test of continuous integratin though git');
 
         
