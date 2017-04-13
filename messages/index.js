@@ -34,15 +34,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
 
-.matches('new account', [
-	 function (session, args, next) {
-        //console.log(args);
-        //session.dialogData.args = args;
 
-		//session.send('This is a test of continuous integratin though git');
-
-	 };
-]);
 
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
