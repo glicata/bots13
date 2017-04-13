@@ -38,7 +38,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
         //console.log(args);
         //session.dialogData.args = args;
 
-		session.send('This is a test of continuous integratin though git');
+		//session.send('This is a test of continuous integratin though git');
 
         
 ]);
