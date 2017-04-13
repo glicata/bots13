@@ -37,13 +37,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 	 function (session, args, next) {
         //console.log(args);
         //session.dialogData.args = args;
-        var accountType = builder.EntityRecognizer.findEntity(args.entities, 'accountType');
-        var accountLevel = builder.EntityRecognizer.findEntity(args.entities, 'accountLevel');
-        var typeOfPersonalAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfPersonalAccount');
-        var typeOfBusinessAccount = builder.EntityRecognizer.findEntity(args.entities, 'accountType::typeOfBusiness');
-
-      
-	 }
+        
+		session.send('This is a test of continuous integratin though git');
 
         
 ]);
