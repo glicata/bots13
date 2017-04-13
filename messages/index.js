@@ -41,7 +41,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 
 		//session.send('This is a test of continuous integratin though git');
 
-	 }
+	 };
 ]);
 
 .onDefault((session) => {
